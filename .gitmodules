@@ -1,3 +1,6 @@
 [submodule "backend"]
 	path = backend
 	url = https://github.com/woragis/dropshipping-backend.git
+[submodule "marketing"]
+	path = marketing
+	url = https://github.com/woragis/dropshipping-marketing.git
