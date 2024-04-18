@@ -2,11 +2,13 @@ import { InsertProduct } from '../../components/InsertProduct'
 import { Login } from '../../components/Login'
 import { Register } from '../../components/Register'
 import { TestBody } from '../../components/Test'
+import { Products } from '../Products'
 
 export const Home: React.FC = () => {
   return (
     <div>
       <h1>This are our products</h1>
+      <Products />
       <br />
       <br />
       <h3>Login</h3>
