@@ -19,11 +19,19 @@ const LoginComponent = () => {
         method: 'POST',
         body: JSON.stringify(loginData),
         credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
       })
       const responseData = await response.json()
-      console.log(responseData)
+      if (response.ok) {
+        const { token } = responseData
+        localStorage.setItem('token', token)
+        console.log(responseData)
+      } else {
+        console.log('Error when receiving request')
+        console.error(responseData)
+      }
     } catch (err) {
-      console.error(err)
+      console.error('Registering error \n' + err)
     }
   }
 

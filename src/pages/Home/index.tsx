@@ -3,6 +3,7 @@ import InsertProductComponent from '../../components/InsertProductComponent'
 import LoginComponent from '../../components/LoginComponent'
 import ProductComponent from '../../components/Product'
 import RegisterComponent from '../../components/RegisterComponent'
+import TestBody from '../../components/Test'
 
 export const Home: React.FC = () => {
   return (
@@ -26,6 +27,11 @@ export const Home: React.FC = () => {
       <hr />
       <h3>Create Product</h3>
       <InsertProductComponent />
+      <br />
+      <br />
+      <hr />
+      <h3>Test body</h3>
+      <TestBody />
     </div>
   )
 }

@@ -15,11 +15,16 @@ const InsertProductComponent = () => {
     console.log('Trying to insert product')
     event.preventDefault()
     try {
+      const token = localStorage.getItem('token')
       const backendUrl = 'http://localhost:5000/products/new'
       const response = await fetch(backendUrl, {
         method: 'POST',
         body: JSON.stringify(newProductData),
         credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
       })
       const responseData = await response.json()
       console.log('Response:')
