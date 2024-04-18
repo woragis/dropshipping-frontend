@@ -7,7 +7,7 @@ import {
   StyledSocialMedia,
 } from './style'
 
-const FooterComponent = () => {
+export const FooterComponent = () => {
   return (
     <StyledFooterComponent>
       <StyledSocialMedia>
@@ -23,5 +23,3 @@ const FooterComponent = () => {
     </StyledFooterComponent>
   )
 }
-
-export default FooterComponent
