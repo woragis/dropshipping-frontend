@@ -1,12 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { FooterComponent } from '../components/Footer'
+import { Pages } from '../types/Pages'
+import { pagesData } from './pagesData'
+import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
 
-import { pagesData } from './pagesData'
-
-import { Pages } from '../types/Pages'
-
-const AppRouter = () => {
+const Router = () => {
   const routes = pagesData.map(({ title, path, element }: Pages) => {
     return <Route key={title} path={path} element={element} />
   })
@@ -14,9 +12,9 @@ const AppRouter = () => {
     <BrowserRouter>
       <Navbar />
       <Routes>{routes}</Routes>
-      <FooterComponent />
+      <Footer />
     </BrowserRouter>
   )
 }
 
-export default AppRouter
+export default Router

@@ -1,6 +1,6 @@
 import { FormEvent } from 'react'
 
-const TestBody = () => {
+export const TestBody = () => {
   const testBody = {
     name: 'Jezreel',
     age: 20,
@@ -32,5 +32,3 @@ const TestBody = () => {
     </form>
   )
 }
-
-export default TestBody

@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 
-const InsertProductComponent = () => {
+export const InsertProduct = () => {
   interface InsertProductDataInterface {
     title: string
     price: number
@@ -72,5 +72,3 @@ const InsertProductComponent = () => {
     </form>
   )
 }
-
-export default InsertProductComponent

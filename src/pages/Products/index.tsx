@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import ProductComponent from '../../components/Product'
-import { ProductsColumn } from './style'
+import { Product } from '../../components/Product'
+import { StyledProducts } from './style'
 
-const ProductsPage = () => {
+export const Products = () => {
   interface Product {
     title: string
     price: number
@@ -43,11 +43,7 @@ const ProductsPage = () => {
       const component = responseData.map(
         ({ title, price, description }: Product) => {
           return (
-            <ProductComponent
-              Title={title}
-              Price={price}
-              Description={description}
-            />
+            <Product Title={title} Price={price} Description={description} />
           )
         }
       )
@@ -55,10 +51,9 @@ const ProductsPage = () => {
     }
   }, [responseData])
   return (
-    <ProductsColumn>
+    <StyledProducts>
       <button onClick={() => ProductsData()}>Try</button>
       {componentBitch}
-    </ProductsColumn>
+    </StyledProducts>
   )
 }
-export default ProductsPage

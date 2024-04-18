@@ -1,29 +1,26 @@
-import React from 'react'
-import InsertProductComponent from '../../components/InsertProductComponent'
-import LoginComponent from '../../components/LoginComponent'
-import RegisterComponent from '../../components/RegisterComponent'
-import TestBody from '../../components/Test'
-import ProductsPage from '../ProductPage'
+import { InsertProduct } from '../../components/InsertProduct'
+import { Login } from '../../components/Login'
+import { Register } from '../../components/Register'
+import { TestBody } from '../../components/Test'
 
 export const Home: React.FC = () => {
   return (
     <div>
       <h1>This are our products</h1>
-      <ProductsPage />
       <br />
       <br />
       <h3>Login</h3>
-      <LoginComponent />
+      <Login />
       <br />
       <br />
       <hr />
       <h3>Register</h3>
-      <RegisterComponent />
+      <Register />
       <br />
       <br />
       <hr />
       <h3>Create Product</h3>
-      <InsertProductComponent />
+      <InsertProduct />
       <br />
       <br />
       <hr />

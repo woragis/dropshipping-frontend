@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ProductsColumn = styled.section`
+export const StyledProducts = styled.main`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;

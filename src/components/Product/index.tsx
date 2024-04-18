@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   ProductDescription,
   ProductInfo,
@@ -14,7 +13,7 @@ interface ProductComponentProps {
   Description: string
 }
 
-const ProductComponent = ({
+export const Product = ({
   Title,
   Price,
   Description,
@@ -32,5 +31,3 @@ const ProductComponent = ({
     </StyledProductComponent>
   )
 }
-
-export default ProductComponent

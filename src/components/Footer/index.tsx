@@ -7,7 +7,7 @@ import {
   StyledSocialMedia,
 } from './style'
 
-export const FooterComponent = () => {
+export const Footer = () => {
   return (
     <StyledFooterComponent>
       <StyledSocialMedia>

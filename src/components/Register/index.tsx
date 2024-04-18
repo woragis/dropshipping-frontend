@@ -1,23 +1,23 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 
-const LoginComponent = () => {
-  interface LoginDataInterface {
+export const Register = () => {
+  interface RegisterDataInterface {
     email: string
     password: string
   }
 
-  const [loginData, setLoginData] = useState<LoginDataInterface>(
-    {} as LoginDataInterface
+  const [registerData, setRegisterData] = useState<RegisterDataInterface>(
+    {} as RegisterDataInterface
   )
 
-  const Login = async (event: FormEvent<HTMLFormElement>) => {
-    console.log('Trying to login')
+  const register = async (event: FormEvent<HTMLFormElement>) => {
+    console.log('Trying to register')
     event.preventDefault()
     try {
-      const backendUrl = 'http://localhost:5000/auth/login'
+      const backendUrl = 'http://localhost:5000/auth/register'
       const response = await fetch(backendUrl, {
         method: 'POST',
-        body: JSON.stringify(loginData),
+        body: JSON.stringify(registerData),
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
       })
@@ -31,24 +31,24 @@ const LoginComponent = () => {
         console.error(responseData)
       }
     } catch (err) {
-      console.error('Registering error \n' + err)
+      console.error('Loging error \n' + err)
     }
   }
 
-  const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setLoginData({ ...loginData, [event.target.id]: event.target.value })
-    console.log(loginData)
+  const handleRegisterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setRegisterData({ ...registerData, [event.target.id]: event.target.value })
+    console.log(registerData)
   }
 
   return (
-    <form onSubmit={Login}>
+    <form onSubmit={register}>
       <label htmlFor="email">Email</label>
       <input
         name="email"
         id="email"
         type={'email'}
         placeholder="email"
-        onChange={handleLoginChange}
+        onChange={handleRegisterChange}
       />
       <label htmlFor="password">Password</label>
       <input
@@ -56,11 +56,9 @@ const LoginComponent = () => {
         id="password"
         type={'password'}
         placeholder="password"
-        onChange={handleLoginChange}
+        onChange={handleRegisterChange}
       />
       <button>Enviar</button>
     </form>
   )
 }
-
-export default LoginComponent

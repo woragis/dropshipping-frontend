@@ -1,6 +1,4 @@
-import React from 'react'
-
-export const AdminPage = () => {
+export const Admin = () => {
   return (
     <div>
       <h1>Admin Page</h1>

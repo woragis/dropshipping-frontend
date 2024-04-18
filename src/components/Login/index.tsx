@@ -1,23 +1,23 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 
-const RegisterComponent = () => {
-  interface RegisterDataInterface {
+export const Login = () => {
+  interface LoginDataInterface {
     email: string
     password: string
   }
 
-  const [registerData, setRegisterData] = useState<RegisterDataInterface>(
-    {} as RegisterDataInterface
+  const [loginData, setLoginData] = useState<LoginDataInterface>(
+    {} as LoginDataInterface
   )
 
-  const register = async (event: FormEvent<HTMLFormElement>) => {
-    console.log('Trying to register')
+  const submitLogin = async (event: FormEvent<HTMLFormElement>) => {
+    console.log('Trying to login')
     event.preventDefault()
     try {
-      const backendUrl = 'http://localhost:5000/auth/register'
+      const backendUrl = 'http://localhost:5000/auth/login'
       const response = await fetch(backendUrl, {
         method: 'POST',
-        body: JSON.stringify(registerData),
+        body: JSON.stringify(loginData),
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
       })
@@ -31,24 +31,24 @@ const RegisterComponent = () => {
         console.error(responseData)
       }
     } catch (err) {
-      console.error('Loging error \n' + err)
+      console.error('Registering error \n' + err)
     }
   }
 
-  const handleRegisterChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRegisterData({ ...registerData, [event.target.id]: event.target.value })
-    console.log(registerData)
+  const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setLoginData({ ...loginData, [event.target.id]: event.target.value })
+    console.log(loginData)
   }
 
   return (
-    <form onSubmit={register}>
+    <form onSubmit={submitLogin}>
       <label htmlFor="email">Email</label>
       <input
         name="email"
         id="email"
         type={'email'}
         placeholder="email"
-        onChange={handleRegisterChange}
+        onChange={handleLoginChange}
       />
       <label htmlFor="password">Password</label>
       <input
@@ -56,11 +56,9 @@ const RegisterComponent = () => {
         id="password"
         type={'password'}
         placeholder="password"
-        onChange={handleRegisterChange}
+        onChange={handleLoginChange}
       />
       <button>Enviar</button>
     </form>
   )
 }
-
-export default RegisterComponent
