@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import FooterComponent from '../components/Footer'
 
 import { Navbar } from '../components/Navbar'
 import { About } from '../pages/About'
@@ -17,6 +18,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
         </Routes>
       </div>
+      <FooterComponent />
     </BrowserRouter>
   )
 }
