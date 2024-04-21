@@ -3,10 +3,12 @@ import { Login } from '../../components/Login'
 import { Register } from '../../components/Register'
 import { TestBody } from '../../components/Test'
 import { Products } from '../Products'
+import { Logout } from '../../components/Logout'
 
 export const Home: React.FC = () => {
   return (
     <div>
+      <Logout />
       <h1>This are our products</h1>
       <Products />
       <br />

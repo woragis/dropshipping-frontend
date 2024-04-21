@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { backendUriPrefix } from '../../config'
 
 export const Register = () => {
   interface RegisterDataInterface {
@@ -14,8 +15,8 @@ export const Register = () => {
     console.log('Trying to register')
     event.preventDefault()
     try {
-      const backendUrl = 'http://localhost:5000/auth/register'
-      const response = await fetch(backendUrl, {
+      const backendUri = backendUriPrefix + 'register'
+      const response = await fetch(backendUri, {
         method: 'POST',
         body: JSON.stringify(registerData),
         credentials: 'include',

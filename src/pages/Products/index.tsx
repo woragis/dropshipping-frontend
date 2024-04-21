@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Product } from '../../components/Product'
+import { ProductComponentProps } from '../../types/Products'
 import { StyledProducts } from './style'
 
 export const Products = () => {
-  interface Product {
-    title: string
-    price: number
-    description: string
-  }
-  type Response = Product[] | undefined
+  type Response = ProductComponentProps[] | undefined
   // const [productsComponent, setProductsComponent] = useState()
   // const [productsDataComponent, setProductsDataComponent] = useState<Product[]>()
   const [responseData, setResponseData] = useState<any>(undefined)
@@ -41,9 +37,9 @@ export const Products = () => {
   useEffect(() => {
     if (responseData) {
       const component = responseData.map(
-        ({ title, price, description }: Product) => {
+        ({ title, price, description }: ProductComponentProps) => {
           return (
-            <Product Title={title} Price={price} Description={description} />
+            <Product title={title} price={price} description={description} />
           )
         }
       )

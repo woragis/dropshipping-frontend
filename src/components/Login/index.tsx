@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { backendUriPrefix } from '../../config'
 
 export const Login = () => {
   interface LoginDataInterface {
@@ -14,7 +15,7 @@ export const Login = () => {
     console.log('Trying to login')
     event.preventDefault()
     try {
-      const backendUrl = 'http://localhost:5000/auth/login'
+      const backendUrl = backendUriPrefix + 'auth/login'
       const response = await fetch(backendUrl, {
         method: 'POST',
         body: JSON.stringify(loginData),

@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { backendUriPrefix } from '../../config'
 
 export const InsertProduct = () => {
   interface InsertProductDataInterface {
@@ -16,7 +17,7 @@ export const InsertProduct = () => {
     event.preventDefault()
     try {
       const token = localStorage.getItem('token')
-      const backendUrl = 'http://localhost:5000/products/new'
+      const backendUrl = backendUriPrefix + 'products/new'
       const response = await fetch(backendUrl, {
         method: 'POST',
         body: JSON.stringify(newProductData),
