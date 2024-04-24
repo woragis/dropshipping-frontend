@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { backendUriPrefix } from '../../config'
+import { RegisterButton, StyledRegisterComponent } from './style'
 
 export const Register = () => {
   interface RegisterDataInterface {
@@ -42,7 +43,8 @@ export const Register = () => {
   }
 
   return (
-    <form onSubmit={register}>
+    <StyledRegisterComponent onSubmit={register}>
+      <h3>Register</h3>
       <label htmlFor="email">Email</label>
       <input
         name="email"
@@ -59,7 +61,7 @@ export const Register = () => {
         placeholder="password"
         onChange={handleRegisterChange}
       />
-      <button>Enviar</button>
-    </form>
+      <RegisterButton>Enviar</RegisterButton>
+    </StyledRegisterComponent>
   )
 }

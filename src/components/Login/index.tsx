@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { backendUriPrefix } from '../../config'
+import { LoginButton, StyledLoginComponent } from './style'
 
 export const Login = () => {
   interface LoginDataInterface {
@@ -42,7 +43,8 @@ export const Login = () => {
   }
 
   return (
-    <form onSubmit={submitLogin}>
+    <StyledLoginComponent onSubmit={submitLogin}>
+      <h3>Login</h3>
       <label htmlFor="email">Email</label>
       <input
         name="email"
@@ -59,7 +61,7 @@ export const Login = () => {
         placeholder="password"
         onChange={handleLoginChange}
       />
-      <button>Enviar</button>
-    </form>
+      <LoginButton>Enviar</LoginButton>
+    </StyledLoginComponent>
   )
 }

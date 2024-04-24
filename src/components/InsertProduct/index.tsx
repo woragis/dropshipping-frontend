@@ -1,5 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { backendUriPrefix } from '../../config'
+import {
+  CreateProductButton,
+  ProductDescription,
+  StyledInsertProduct,
+} from './style'
 
 export const InsertProduct = () => {
   interface InsertProductDataInterface {
@@ -45,7 +50,7 @@ export const InsertProduct = () => {
   }
 
   return (
-    <form onSubmit={insertProduct}>
+    <StyledInsertProduct onSubmit={insertProduct}>
       <label htmlFor="title">Title</label>
       <input
         name="title"
@@ -63,13 +68,13 @@ export const InsertProduct = () => {
         onChange={handleInsertProductChange}
       />
       <label htmlFor="description">Description</label>
-      <textarea
+      <ProductDescription
         name="description"
         id="description"
         placeholder="Product Description"
         onChange={handleInsertProductChange}
       />
-      <button>Criar produto</button>
-    </form>
+      <CreateProductButton>Criar produto</CreateProductButton>
+    </StyledInsertProduct>
   )
 }
