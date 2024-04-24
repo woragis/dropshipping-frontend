@@ -15,7 +15,7 @@ export const Register = () => {
     console.log('Trying to register')
     event.preventDefault()
     try {
-      const backendUri = backendUriPrefix + 'register'
+      const backendUri = backendUriPrefix + 'auth/register'
       const response = await fetch(backendUri, {
         method: 'POST',
         body: JSON.stringify(registerData),
