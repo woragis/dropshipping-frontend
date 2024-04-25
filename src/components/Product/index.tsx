@@ -103,3 +103,11 @@ export const AdminProduct = ({
     </StyledProductComponent>
   )
 }
+
+export const WishlistProduct = () => {
+  return <></>
+}
+
+export const CartProduct = () => {
+  return <></>
+}

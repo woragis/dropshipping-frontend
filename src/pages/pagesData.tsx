@@ -7,6 +7,8 @@ import { Products } from './Products'
 import { Profile } from './Profile'
 import { Register } from './Register'
 import { Login } from './Login'
+import { Cart } from './Cart'
+import { Wishlist } from './Wishlist'
 
 export const pagesData: Pages[] = [
   { title: 'about', path: '/about', element: <About /> },
@@ -17,6 +19,8 @@ export const pagesData: Pages[] = [
   { title: 'profile', path: '/profile', element: <Profile /> },
   { title: 'register', path: '/register', element: <Register /> },
   { title: 'login', path: '/login', element: <Login /> },
+  { title: 'cart', path: '/cart', element: <Cart /> },
+  { title: 'wishlist', path: '/wishlist', element: <Wishlist /> },
 ]
 
 export const navPages: Pages[] = [
