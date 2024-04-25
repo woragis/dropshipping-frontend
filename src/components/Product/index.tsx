@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { backendUriPrefix } from '../../config'
-import { EditProductProps, ProductComponentProps } from '../../types/Products'
+import { ProductComponentProps } from '../../types/Products'
 import {
   ProductDescription,
   ProductInfo,
@@ -10,13 +10,14 @@ import {
   StyledProductComponent,
 } from './style'
 
-export const Product = ({
+export const StoreProduct = ({
+  _id,
   title,
   price,
   description,
 }: ProductComponentProps) => {
   return (
-    <StyledProductComponent>
+    <StyledProductComponent key={_id}>
       <ProductPicture />
       <ProductInfo>
         <ProductTitle>{title}</ProductTitle>
@@ -34,11 +35,18 @@ export const AdminProduct = ({
   title,
   price,
   description,
-}: EditProductProps) => {
-  const [productData, setProductData] = useState<EditProductProps>(
-    {} as EditProductProps
-  )
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+}: ProductComponentProps) => {
+  const [productData, setProductData] = useState<ProductComponentProps>({
+    _id: _id,
+    title: title,
+    price: price,
+    description: description,
+  })
+  const [editMode, setEditMode] = useState<boolean>(false)
+  const [deleted, setDeleted] = useState<boolean>(false)
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setProductData({ ...productData, [event.target.id]: event.target.value })
   }
   const getProduct = () => {
@@ -55,7 +63,12 @@ export const AdminProduct = ({
   useEffect(() => {
     getProduct()
   }, [])
+
   const editProduct = () => {
+    console.log(productData)
+    setEditMode((prevState) => !prevState)
+  }
+  const updateProduct = () => {
     try {
       const token = localStorage.getItem('token')
       const backendUri = backendUriPrefix + 'products/edit'
@@ -71,11 +84,11 @@ export const AdminProduct = ({
       console.log(err)
     }
   }
-  const deleteProduct = () => {
+  const deleteProduct = async () => {
     try {
       const token = localStorage.getItem('token')
       const backendUri = backendUriPrefix + 'products/delete'
-      fetch(backendUri, {
+      const response = await fetch(backendUri, {
         method: 'DELETE',
         body: JSON.stringify({ _id: _id }),
         headers: {
@@ -83,24 +96,61 @@ export const AdminProduct = ({
           authorization: `Bearer ${token}`,
         },
       })
+      if (response.ok) {
+        setDeleted((prevState) => !prevState)
+      }
     } catch (err) {
       console.log(err)
+      alert('Error deleting product')
     }
   }
-  return (
-    <StyledProductComponent key={_id}>
-      <ProductPicture />
+  const EditModeProduct = () => {
+    return (
       <ProductInfo>
-        <ProductTitle>{title}</ProductTitle>
-        <ProductPrice>R$ {price}</ProductPrice>
-        <ProductDescription>
-          <p>{description}</p>
-        </ProductDescription>
-        <input type="text" onChange={handleChange} />
-        <button onClick={editProduct}>Edit</button>
-        <button onClick={deleteProduct}>Delete</button>
+        <input
+          type="text"
+          placeholder="Product Name"
+          value={productData.title}
+          onChange={handleChange}
+        />
+        a
+        <input
+          type="number"
+          placeholder="Product Price"
+          value={productData.price}
+          onChange={handleChange}
+        />
+        <textarea
+          placeholder="Product Descripiton"
+          value={productData.description}
+          onChange={handleChange}
+        />
+        <button onClick={editProduct}>Cancel</button>
+        <button onClick={updateProduct}>Edit</button>
       </ProductInfo>
-    </StyledProductComponent>
+    )
+  }
+  return (
+    <>
+      {!deleted && (
+        <StyledProductComponent key={_id}>
+          <ProductPicture />
+          {!editMode && (
+            <ProductInfo>
+              <ProductTitle>{title}</ProductTitle>
+              <ProductPrice>R$ {price}</ProductPrice>
+              <ProductDescription>
+                <p>{description}</p>
+              </ProductDescription>
+              <button onClick={editProduct}>Edit</button>
+              <button onClick={deleteProduct}>Delete</button>
+            </ProductInfo>
+          )}
+          {editMode && <EditModeProduct />}
+        </StyledProductComponent>
+      )}
+      {deleted && <></>}
+    </>
   )
 }
 

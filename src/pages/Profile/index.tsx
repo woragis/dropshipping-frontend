@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Cart as CartComponent } from '../../components/Cart'
 
 export const Profile = () => {
   interface UserData {
@@ -24,20 +25,36 @@ export const Profile = () => {
       setProfileData(responseData[0])
     }
   }
+
   const UserInfo = () => {
     return (
       <>
-        <h3>{profileData.email}</h3>
-        <p>{profileData.password}</p>
+        <h3>Username: {profileData.username}</h3>
+        <p>
+          <strong>Email: </strong>
+          {profileData.email}
+        </p>
+        <p>
+          <strong>Password: </strong>
+          {profileData.password}
+        </p>
+        <div>
+          <h4>Cart</h4>
+          <CartComponent />
+        </div>
+        <div>
+          <h4>Wishlist</h4>
+        </div>
       </>
     )
   }
+
   useEffect(() => {
     fetchProfile()
   }, [])
+
   return (
     <main>
-      <h1>Hi</h1>
       {profileData.email && profileData.email.length >= 5 && <UserInfo />}
     </main>
   )

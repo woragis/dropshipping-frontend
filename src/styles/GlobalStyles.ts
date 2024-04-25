@@ -7,6 +7,7 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     text-decoration: none;
     list-style-type: none;
+    font-size: 15px;
   }
 `
 

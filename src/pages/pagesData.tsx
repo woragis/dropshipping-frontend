@@ -31,4 +31,6 @@ export const navPages: Pages[] = [
   pagesData[5],
   pagesData[6],
   pagesData[7],
+  pagesData[8],
+  pagesData[9],
 ]

@@ -1,3 +1,5 @@
+import React from 'react'
+
 export const Product = () => {
-  return <></>
+  return <h1>Product</h1>
 }
