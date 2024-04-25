@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { backendUriPrefix } from '../../config'
 import { ProductComponentProps } from '../../types/Products'
 import {
@@ -18,14 +19,16 @@ export const StoreProduct = ({
 }: ProductComponentProps) => {
   return (
     <StyledProductComponent key={_id}>
-      <ProductPicture />
-      <ProductInfo>
-        <ProductTitle>{title}</ProductTitle>
-        <ProductPrice>R$ {price}</ProductPrice>
-        <ProductDescription>
-          <p>{description}</p>
-        </ProductDescription>
-      </ProductInfo>
+      <NavLink to={'/product/' + _id}>
+        <ProductPicture />
+        <ProductInfo>
+          <ProductTitle>{title}</ProductTitle>
+          <ProductPrice>R$ {price}</ProductPrice>
+          <ProductDescription>
+            <p>{description}</p>
+          </ProductDescription>
+        </ProductInfo>
+      </NavLink>
     </StyledProductComponent>
   )
 }
