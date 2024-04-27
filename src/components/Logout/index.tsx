@@ -1,8 +1,9 @@
-import React from 'react'
+import { StyledLogoutComponent } from './style'
 
 export const Logout = () => {
   const logout = async () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('role')
   }
-  return <button onClick={logout}>Logout</button>
+  return <StyledLogoutComponent onClick={logout}>Logout</StyledLogoutComponent>
 }

@@ -4,3 +4,10 @@ export interface ProductComponentProps {
   price: number
   description: string
 }
+
+export interface CartProductProps {
+  _id: string
+  title: string
+  price: number
+  quantity: number
+}

@@ -11,26 +11,26 @@ import { Cart } from './Cart'
 import { Wishlist } from './Wishlist'
 
 export const pagesData: Pages[] = [
-  { title: 'about', path: '/about', element: <About /> },
-  { title: 'admin', path: '/admin', element: <Admin /> },
-  { title: 'home', path: '/', element: <Home /> },
-  { title: 'product', path: '/product/:id', element: <Product /> },
-  { title: 'products', path: '/products', element: <Products /> },
-  { title: 'profile', path: '/profile', element: <Profile /> },
-  { title: 'register', path: '/register', element: <Register /> },
-  { title: 'login', path: '/login', element: <Login /> },
-  { title: 'cart', path: '/cart', element: <Cart /> },
-  { title: 'wishlist', path: '/wishlist', element: <Wishlist /> },
+  { title: 'about', path: '/about', element: <About /> }, // 0
+  { title: 'admin', path: '/admin', element: <Admin /> }, // 1
+  { title: 'home', path: '/', element: <Home /> }, // 2
+  { title: 'product', path: '/product/:id', element: <Product /> }, // 3
+  { title: 'products', path: '/products', element: <Products /> }, // 4
+  { title: 'profile', path: '/profile', element: <Profile /> }, // 5
+  { title: 'register', path: '/register', element: <Register /> }, // 6
+  { title: 'login', path: '/login', element: <Login /> }, // 7
+  { title: 'cart', path: '/cart', element: <Cart /> }, // 8
+  { title: 'wishlist', path: '/wishlist', element: <Wishlist /> }, // 9
 ]
 
-export const navPages: Pages[] = [
-  pagesData[2],
-  pagesData[4],
-  pagesData[1],
-  pagesData[0],
+export const navPages: Pages[] = [pagesData[2], pagesData[0]]
+
+export const unloggedUserPages: Pages[] = [pagesData[6], pagesData[7]]
+
+export const loggedUserPages: Pages[] = [
   pagesData[5],
-  pagesData[6],
-  pagesData[7],
   pagesData[8],
   pagesData[9],
 ]
+
+export const adminUserPages: Pages[] = [pagesData[1]]

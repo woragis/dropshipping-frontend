@@ -35,10 +35,6 @@ export const Wishlist = () => {
   }, [])
   useEffect(() => {
     if (wishlistData) {
-      if (wishlistData.length > 1) {
-        const wishlistProducts = '<h1>No product in your wishlist</h1>'
-        setComponentBitch(wishlistProducts)
-      }
       const wishlistProducts = wishlistData.map(
         ({ title, price }: WishlistData) => {
           return (
@@ -49,5 +45,12 @@ export const Wishlist = () => {
       setComponentBitch(wishlistProducts)
     }
   }, [wishlistData])
+  if (wishlistData && wishlistData.length < 1) {
+    return (
+      <>
+        <h1>No items found in your wishlist</h1>
+      </>
+    )
+  }
   return <>{componentBitch}</>
 }

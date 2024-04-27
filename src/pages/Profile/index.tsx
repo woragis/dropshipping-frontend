@@ -26,18 +26,52 @@ export const Profile = () => {
     }
   }
 
+  const [editMode, setEditMode] = useState<boolean>(false)
   const UserInfo = () => {
     return (
       <>
-        <h3>Username: {profileData.username}</h3>
-        <p>
-          <strong>Email: </strong>
-          {profileData.email}
-        </p>
-        <p>
-          <strong>Password: </strong>
-          {profileData.password}
-        </p>
+        <div>
+          {!editMode &&
+            <>
+              <h3>Username: {profileData.username}</h3>
+              <p>
+                <strong>Email: </strong>
+                {profileData.email}
+              </p>
+              <p>
+                <strong>Password: </strong>
+                {profileData.password}
+              </p>
+              <button onClick={() => setEditMode(prevState => !prevState)}>Edit</button>
+            </>
+          }
+          {editMode &&
+            <>
+              <form>
+                <label htmlFor="username">Username</label>
+                <input
+                  name="username"
+                  id="username"
+                  type={'text'}
+                  placeholder="Username"
+                />
+                <label htmlFor="email">Email</label>
+                <input
+                  name="email"
+                  id="email"
+                  type={'email'}
+                  placeholder="Email"
+                />
+                <label htmlFor="password">Password</label>
+                <input
+                  name="password"
+                  id="password"
+                  type={'password'}
+                  placeholder="Password"
+                />
+              </form>
+            </>}
+        </div>
         <div>
           <h4>Cart</h4>
           <CartComponent />

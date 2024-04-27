@@ -4,6 +4,7 @@ import { RegisterButton, StyledRegisterComponent } from './style'
 
 export const Register = () => {
   interface RegisterDataInterface {
+    username: string;
     email: string
     password: string
   }
@@ -27,6 +28,7 @@ export const Register = () => {
       if (response.ok) {
         const { token } = responseData
         localStorage.setItem('token', token)
+        localStorage.setItem('admin', responseData.admin)
         console.log(responseData)
       } else {
         console.log('Error when receiving request')
@@ -45,12 +47,22 @@ export const Register = () => {
   return (
     <StyledRegisterComponent onSubmit={register}>
       <h3>Register</h3>
+      <label htmlFor="username">Username</label>
+      <input
+        name="username"
+        id="username"
+        type={'text'}
+        placeholder="Username"
+        value={registerData.username}
+        onChange={handleRegisterChange}
+      />
       <label htmlFor="email">Email</label>
       <input
         name="email"
         id="email"
         type={'email'}
-        placeholder="email"
+        placeholder="Email"
+        value={registerData.email}
         onChange={handleRegisterChange}
       />
       <label htmlFor="password">Password</label>
@@ -58,7 +70,8 @@ export const Register = () => {
         name="password"
         id="password"
         type={'password'}
-        placeholder="password"
+        placeholder="Password"
+        value={registerData.password}
         onChange={handleRegisterChange}
       />
       <RegisterButton>Enviar</RegisterButton>

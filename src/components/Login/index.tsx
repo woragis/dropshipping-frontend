@@ -23,11 +23,11 @@ export const Login = () => {
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
       })
-      const responseData = await response.json()
+      const responseData= await response.json()
       if (response.ok) {
         const { token } = responseData
         localStorage.setItem('token', token)
-        console.log(responseData)
+        localStorage.setItem('role', responseData.role)
       } else {
         console.log('Error when receiving request')
         console.error(responseData)

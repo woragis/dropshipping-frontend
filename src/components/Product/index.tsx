@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { backendUriPrefix } from '../../config'
 import { ProductComponentProps } from '../../types/Products'
+import { CartProductProps } from '../../types/Products'
 import {
   ProductDescription,
   ProductInfo,
@@ -17,7 +18,7 @@ export const StoreProduct = ({
   price,
   description,
 }: ProductComponentProps) => {
-  const [cartQuantity, setCartQuantity] = useState<number>(0)
+  const [cartQuantity, setCartQuantity] = useState<number>(1)
   const addToWishlist = async () => {
     try {
       const backendUri = backendUriPrefix + 'wishlist'
@@ -78,9 +79,9 @@ export const StoreProduct = ({
       </NavLink>
       <button onClick={addToWishlist}>Add to Wishlist</button>
       <div>
-        <button onClick={incrementCartQuantity}>Increment</button>
-        <span>{cartQuantity}</span>
         <button onClick={decrementCartQuantity}>Decrement</button>
+        <span>{cartQuantity}</span>
+        <button onClick={incrementCartQuantity}>Increment</button>
       </div>
       <button onClick={addToCart}>Add to Cart</button>
     </StyledProductComponent>
@@ -93,36 +94,20 @@ export const AdminProduct = ({
   price,
   description,
 }: ProductComponentProps) => {
-  const [productData, setProductData] = useState<ProductComponentProps>({
-    _id: _id,
-    title: title,
-    price: price,
-    description: description,
-  })
+  const [productData, setProductData] = useState<ProductComponentProps>(
+    {} as ProductComponentProps
+  )
   const [editMode, setEditMode] = useState<boolean>(false)
   const [deleted, setDeleted] = useState<boolean>(false)
+  useEffect(() => {
+    setProductData({ _id, title, price, description })
+  }, [])
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setProductData({ ...productData, [event.target.id]: event.target.value })
   }
-  const getProduct = () => {
-    try {
-      const backendUri = backendUriPrefix + 'products/'
-      fetch(backendUri, {
-        method: 'POST',
-        body: JSON.stringify({ _id: _id }),
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
-  useEffect(() => {
-    getProduct()
-  }, [])
-
   const editProduct = () => {
-    console.log(productData)
     setEditMode((prevState) => !prevState)
   }
   const updateProduct = async () => {
@@ -175,7 +160,6 @@ export const AdminProduct = ({
           value={productData.title}
           onChange={handleChange}
         />
-        a
         <input
           type="number"
           placeholder="Product Price"
@@ -220,6 +204,21 @@ export const WishlistProduct = () => {
   return <></>
 }
 
-export const CartProduct = () => {
-  return <></>
+export const CartProduct = ({ title, price, quantity }: CartProductProps) => {
+  return (
+    <div>
+      <p>
+        <strong>Name: </strong>
+        {title}
+      </p>
+      <p>
+        <strong>Price: </strong>
+        {price}
+      </p>
+      <p>
+        <strong>Quantity: </strong>
+        {quantity}
+      </p>
+    </div>
+  )
 }
