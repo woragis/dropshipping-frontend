@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom'
 import {
   navPages,
   unloggedUserPages,
@@ -7,35 +6,36 @@ import {
 } from '../../pages/pagesData'
 import { Pages } from '../../types/Pages'
 import { Logout } from '../Logout'
+import { StyledHeader, StyledLinks, StyledLink, StyledLogo } from './style'
 
 export const Navbar: React.FC = () => {
   const links = navPages.map(({ title, path }: Pages) => {
     return (
-      <li key={title}>
-        <NavLink to={path}>{title.toUpperCase()}</NavLink>
-      </li>
+      <StyledLink key={title} to={path}>
+        {title.toUpperCase()}
+      </StyledLink>
     )
   })
 
   const unloggedPages = unloggedUserPages.map(({ title, path }: Pages) => {
     return (
-      <li key={title}>
-        <NavLink to={path}>{title.toUpperCase()}</NavLink>
-      </li>
+      <StyledLink key={title} to={path}>
+        {title.toUpperCase()}
+      </StyledLink>
     )
   })
   const loggedPages = loggedUserPages.map(({ title, path }: Pages) => {
     return (
-      <li key={title}>
-        <NavLink to={path}>{title.toUpperCase()}</NavLink>
-      </li>
+      <StyledLink key={title} to={path}>
+        {title.toUpperCase()}
+      </StyledLink>
     )
   })
   const adminPages = adminUserPages.map(({ title, path }: Pages) => {
     return (
-      <li key={title}>
-        <NavLink to={path}>{title.toUpperCase()}</NavLink>
-      </li>
+      <StyledLink key={title} to={path}>
+        {title.toUpperCase()}
+      </StyledLink>
     )
   })
 
@@ -43,19 +43,17 @@ export const Navbar: React.FC = () => {
   const isLogged = localStorage.getItem('token')
 
   return (
-    <nav>
-      <div className="nav-wrapper cyan darken-1 px1">
-        <NavLink to="/" className="brand-logo">
-          Redux + TypeScript
-        </NavLink>
-        <ul className="right hide-on-med-and-down">
-          {links}
-          {isAdmin && adminPages}
-          {isLogged && loggedPages}
-          {!isLogged && unloggedPages}
-          {isLogged && <Logout />}
-        </ul>
-      </div>
-    </nav>
+    <StyledHeader>
+      <StyledLogo>
+        Loja de Comprar Produtos <small>eu acho</small>
+      </StyledLogo>
+      <StyledLinks>
+        {links}
+        {isAdmin && adminPages}
+        {isLogged && loggedPages}
+        {!isLogged && unloggedPages}
+        {isLogged && <Logout />}
+      </StyledLinks>
+    </StyledHeader>
   )
 }
