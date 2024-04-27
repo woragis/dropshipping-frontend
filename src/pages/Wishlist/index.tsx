@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { StoreProduct } from '../../components/Product'
 import { backendUriPrefix } from '../../config'
+import { WishlistResponseInterface } from '../../types/Responses'
+
 export const Wishlist = () => {
-  const [wishlistData, setWishlistData] = useState<any>(undefined)
+  const [wishlistData, setWishlistData] = useState<
+    WishlistResponseInterface[] | undefined
+  >(undefined)
   const [componentBitch, setComponentBitch] = useState<any>(undefined)
-  interface WishlistData {
-    title: string
-    price: number
-  }
   const fetchWishlist = async () => {
     try {
       const token = localStorage.getItem('token')
@@ -20,7 +20,7 @@ export const Wishlist = () => {
           authorization: `Bearer ${token}`,
         },
       })
-      const responseData: WishlistData[] = await response.json()
+      const responseData: WishlistResponseInterface[] = await response.json()
       if (response.ok) {
         setWishlistData(responseData)
       } else {
@@ -36,9 +36,14 @@ export const Wishlist = () => {
   useEffect(() => {
     if (wishlistData) {
       const wishlistProducts = wishlistData.map(
-        ({ title, price }: WishlistData) => {
+        ({ _id, title, price, description }: WishlistResponseInterface) => {
           return (
-            <StoreProduct _id="" title={title} price={price} description="" />
+            <StoreProduct
+              _id={_id}
+              title={title}
+              price={price}
+              description={description}
+            />
           )
         }
       )

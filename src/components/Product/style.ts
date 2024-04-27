@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { FaHeart, FaShoppingCart } from 'react-icons/fa'
-import { FaPlus, FaMinus } from 'react-icons/fa6'
+import { FaEdit, FaHeart, FaShoppingCart, FaTrash } from 'react-icons/fa'
+import { FaPlus, FaMinus, FaXmark } from 'react-icons/fa6'
 
 export const StyledProductComponent = styled.div`
   background-color: white;
   border: 1px solid black;
   display: inline-block;
-  display: grid;
+  display: flex;
   grid-template-rows: 300px 50px 30px;
   justify-content: center;
   align-items: center;
@@ -37,7 +37,6 @@ export const ProductTitle = styled.h4`
 `
 
 export const ProductDescription = styled.div`
-  overflow: hidden;
   height: 50px;
   width: 200px;
   position: relative;
@@ -156,4 +155,49 @@ export const ProductCartCount = styled.span`
   text-align: center;
   width: 20px;
   height: 100%;
+`
+
+export const AdminButtonsContainer = styled.canvas`
+  height: 100px;
+  width: 100px;
+  background-color: black;
+`
+
+export const StyledEditProductButton = styled(FaEdit)`
+  color: black;
+  padding: 5px;
+  font-size: 3em;
+  transition: 300ms;
+  width: 50px;
+  height: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+export const StyledDeleteProductButton = styled(FaTrash)`
+  color: black;
+  padding: 5px;
+  font-size: 3em;
+  transition: 300ms;
+  width: 50px;
+  height: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+export const StyledCancelEditButton = styled(FaXmark)`
+  color: black;
+  padding: 5px;
+  font-size: 3em;
+  transition: 300ms;
+  width: 50px;
+  height: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `

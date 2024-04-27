@@ -1,14 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { backendUriPrefix } from '../../config'
 import { RegisterButton, StyledRegisterComponent } from './style'
+import { RegisterDataInterface } from '../../types/Forms'
 
 export const Register = () => {
-  interface RegisterDataInterface {
-    username: string;
-    email: string
-    password: string
-  }
-
   const [registerData, setRegisterData] = useState<RegisterDataInterface>(
     {} as RegisterDataInterface
   )

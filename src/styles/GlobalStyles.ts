@@ -9,6 +9,9 @@ const GlobalStyles = createGlobalStyle`
     list-style-type: none;
     font-size: 15px;
   }
+  main {
+    min-height: calc(100vh - 180px);
+  }
 `
 
 export default GlobalStyles

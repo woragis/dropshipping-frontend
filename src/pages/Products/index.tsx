@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { AdminProduct, StoreProduct } from '../../components/Product'
 import { ProductComponentProps } from '../../types/Products'
+import { ProductResponseInterface } from '../../types/Responses'
 import { StyledProducts } from './style'
 
 export const Products = () => {
-  type Response = ProductComponentProps[] | undefined
-  // const [productsComponent, setProductsComponent] = useState()
-  // const [productsDataComponent, setProductsDataComponent] = useState<Product[]>()
-  const [responseData, setResponseData] = useState<any>(undefined)
+  const [responseData, setResponseData] = useState<
+    ProductResponseInterface[] | undefined
+  >(undefined)
   const [componentBitch, setComponentBitch] = useState<any>(undefined)
 
   const ProductsData = async (skip: number = 0, limit: number = 10) => {
@@ -18,7 +18,7 @@ export const Products = () => {
         body: JSON.stringify({ skip, limit }),
         headers: { 'Content-Type': 'application/json' },
       })
-      const products: Response = await response.json()
+      const products: ProductResponseInterface[] = await response.json()
       if (response.ok) {
         setResponseData(products)
       } else {
@@ -55,10 +55,9 @@ export const Products = () => {
 }
 
 export const AdminProducts = () => {
-  type Response = ProductComponentProps[] | undefined
-  // const [productsComponent, setProductsComponent] = useState()
-  // const [productsDataComponent, setProductsDataComponent] = useState<Product[]>()
-  const [responseData, setResponseData] = useState<any>(undefined)
+  const [responseData, setResponseData] = useState<
+    ProductResponseInterface[] | undefined
+  >(undefined)
   const [componentBitch, setComponentBitch] = useState<any>(undefined)
 
   const ProductsData = async (skip: number = 0, limit: number = 10) => {
@@ -69,7 +68,7 @@ export const AdminProducts = () => {
         body: JSON.stringify({ skip, limit }),
         headers: { 'Content-Type': 'application/json' },
       })
-      const products: Response = await response.json()
+      const products: ProductResponseInterface[] = await response.json()
       if (response.ok) {
         // setProductsDataComponent(products)
         setResponseData(products)

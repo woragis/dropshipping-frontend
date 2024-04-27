@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Cart as CartComponent } from '../../components/Cart'
+import { UserData } from '../../types/Responses'
 
 export const Profile = () => {
-  interface UserData {
-    username: string
-    email: string
-    password: string
-  }
   const [profileData, setProfileData] = useState<UserData>({} as UserData)
   const fetchProfile = async () => {
     const token = localStorage.getItem('token')
@@ -31,7 +27,7 @@ export const Profile = () => {
     return (
       <>
         <div>
-          {!editMode &&
+          {!editMode && (
             <>
               <h3>Username: {profileData.username}</h3>
               <p>
@@ -42,10 +38,12 @@ export const Profile = () => {
                 <strong>Password: </strong>
                 {profileData.password}
               </p>
-              <button onClick={() => setEditMode(prevState => !prevState)}>Edit</button>
+              <button onClick={() => setEditMode((prevState) => !prevState)}>
+                Edit
+              </button>
             </>
-          }
-          {editMode &&
+          )}
+          {editMode && (
             <>
               <form>
                 <label htmlFor="username">Username</label>
@@ -70,7 +68,8 @@ export const Profile = () => {
                   placeholder="Password"
                 />
               </form>
-            </>}
+            </>
+          )}
         </div>
         <div>
           <h4>Cart</h4>

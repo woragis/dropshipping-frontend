@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledRowComponent = styled.article`
   width: 100%;
-  height: 200px;
+  height: 300px;
   border: 1px solid black;
   padding: 10px;
   display: flex;

@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { StyledAbout } from './style'
 
 export const About: React.FC = () => {
   const navigate = useNavigate()
 
   return (
-    <Fragment>
+    <StyledAbout>
       <h1>About</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
@@ -21,6 +21,6 @@ export const About: React.FC = () => {
       >
         Go back
       </button>
-    </Fragment>
+    </StyledAbout>
   )
 }

@@ -1,15 +1,18 @@
-import { FC, useEffect, useState } from 'react'
-import { RowComponent } from '../RowComponent'
+import { useEffect, useState } from 'react'
 import { CartProduct } from '../Product'
 import { backendUriPrefix } from '../../config'
-import { CartProductProps } from '../../types/Products'
+// import { CartProductProps } from '../../types/Products'
+import { StyledRowComponent } from '../RowComponent/style'
+import { CartResponseInterface } from '../../types/Responses'
 
 export const Cart = () => {
-  const [cartData, setCartData] = useState<any>(undefined)
+  const [cartData, setCartData] = useState<CartResponseInterface[] | undefined>(
+    undefined
+  )
   const [cartComponent, setCartComponent] = useState<any>(undefined)
   const fetchCart = async () => {
     try {
-      const backendUri = backendUriPrefix + 'product/'
+      const backendUri = backendUriPrefix + 'cart/'
       const token = localStorage.getItem('token')
       const response = await fetch(backendUri, {
         method: 'GET',
@@ -20,7 +23,7 @@ export const Cart = () => {
         },
       })
       if (response.ok) {
-        const responseData = await response.json()
+        const responseData: CartResponseInterface[] = await response.json()
         setCartData(responseData)
       } else {
         console.log('Error fetching cart')
@@ -35,12 +38,13 @@ export const Cart = () => {
   useEffect(() => {
     if (cartData) {
       const cartItems = cartData.map(
-        ({ _id, title, price, quantity }: CartProductProps) => {
+        ({ product, quantity }: CartResponseInterface) => {
           return (
             <CartProduct
-              _id={_id}
-              title={title}
-              price={price}
+              _id={product._id}
+              title={product.title}
+              price={product.price}
+              description={product.description}
               quantity={quantity}
             />
           )
@@ -49,8 +53,5 @@ export const Cart = () => {
       setCartComponent(cartItems)
     }
   }, [cartData])
-  const CartComponent: FC = () => {
-    return <>{cartComponent}</>
-  }
-  return <RowComponent children={<CartComponent />} />
+  return <StyledRowComponent>{cartComponent}</StyledRowComponent>
 }

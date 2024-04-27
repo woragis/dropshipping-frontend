@@ -1,13 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { backendUriPrefix } from '../../config'
 import { LoginButton, StyledLoginComponent } from './style'
+import { LoginDataInterface } from '../../types/Forms'
+import { LoginResponseInterface } from '../../types/Responses'
 
 export const Login = () => {
-  interface LoginDataInterface {
-    email: string
-    password: string
-  }
-
   const [loginData, setLoginData] = useState<LoginDataInterface>(
     {} as LoginDataInterface
   )
@@ -23,11 +20,11 @@ export const Login = () => {
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
       })
-      const responseData= await response.json()
+      const responseData: LoginResponseInterface = await response.json()
       if (response.ok) {
-        const { token } = responseData
+        const { token, role } = responseData
         localStorage.setItem('token', token)
-        localStorage.setItem('role', responseData.role)
+        localStorage.setItem('role', role)
       } else {
         console.log('Error when receiving request')
         console.error(responseData)

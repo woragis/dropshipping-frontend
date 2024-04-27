@@ -6,9 +6,9 @@ export const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  width: 100%;
   background: black;
   color: white;
+  padding: 0 20px;
 `
 
 export const StyledLinks = styled.ul`

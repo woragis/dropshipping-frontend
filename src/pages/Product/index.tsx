@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { backendUriPrefix } from '../../config'
+import { ProductResponseInterface } from '../../types/Responses'
 
 export const Product = () => {
   const { id } = useParams()
@@ -11,7 +12,9 @@ export const Product = () => {
   // price: number
   // description: string
   // }
-  const [productData, setProductData] = useState<any>(undefined)
+  const [productData, setProductData] = useState<
+    ProductResponseInterface | undefined
+  >(undefined)
   const [productComponent, setProductComponent] = useState<any>(undefined)
   const getProduct = async () => {
     const backendUri = backendUriPrefix + 'products/product'
@@ -20,7 +23,7 @@ export const Product = () => {
       body: JSON.stringify({ _id: id }),
       headers: { 'Content-Type': 'application/json' },
     })
-    const responseData = await response.json()
+    const responseData: ProductResponseInterface = await response.json()
     if (response.ok) {
       setProductData(responseData)
     } else {
@@ -45,6 +48,6 @@ export const Product = () => {
       }
       setProductComponent(newComponent)
     }
-  }, productData)
+  }, productData as undefined)
   return <h1>Product, {productComponent}</h1>
 }

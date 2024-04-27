@@ -3,7 +3,12 @@ import { NavLink } from 'react-router-dom'
 import { backendUriPrefix } from '../../config'
 import { ProductComponentProps } from '../../types/Products'
 import { CartProductProps } from '../../types/Products'
-import { ProductCartCount } from './style'
+import {
+  ProductCartCount,
+  StyledCancelEditButton,
+  StyledDeleteProductButton,
+  StyledEditProductButton,
+} from './style'
 import {
   ProductCartInteraction,
   ProductDescription,
@@ -180,8 +185,8 @@ export const AdminProduct = ({
           value={productData.description}
           onChange={handleChange}
         />
-        <button onClick={editProduct}>Cancel</button>
-        <button onClick={updateProduct}>Edit</button>
+        <StyledCancelEditButton onClick={editProduct} />
+        <StyledEditProductButton onClick={updateProduct} />
       </ProductInfo>
     )
   }
@@ -191,15 +196,17 @@ export const AdminProduct = ({
         <StyledProductComponent key={_id}>
           <ProductPicture />
           {!editMode && (
-            <ProductInfo>
-              <ProductTitle>{title}</ProductTitle>
-              <ProductPrice>R$ {price}</ProductPrice>
-              <ProductDescription>
-                <p>{description}</p>
-              </ProductDescription>
-              <button onClick={editProduct}>Edit</button>
-              <button onClick={deleteProduct}>Delete</button>
-            </ProductInfo>
+            <>
+              <ProductInfo>
+                <ProductTitle>{title}</ProductTitle>
+                <ProductPrice>R$ {price}</ProductPrice>
+                <ProductDescription>
+                  <p>{description}</p>
+                </ProductDescription>
+              </ProductInfo>
+              <StyledEditProductButton onClick={editProduct} />
+              <StyledDeleteProductButton onClick={deleteProduct} />
+            </>
           )}
           {editMode && <EditModeProduct />}
         </StyledProductComponent>
@@ -213,21 +220,29 @@ export const WishlistProduct = () => {
   return <></>
 }
 
-export const CartProduct = ({ title, price, quantity }: CartProductProps) => {
+export const CartProduct = ({
+  _id,
+  title,
+  price,
+  description,
+  quantity,
+}: CartProductProps) => {
   return (
-    <div>
-      <p>
-        <strong>Name: </strong>
-        {title}
-      </p>
-      <p>
-        <strong>Price: </strong>
-        {price}
-      </p>
+    <StyledProductComponent key={_id}>
+      <NavLink to={'/product/' + _id}>
+        <ProductPicture />
+        <ProductInfo>
+          <ProductTitle>{title}</ProductTitle>
+          <ProductPrice>R$ {price}</ProductPrice>
+        </ProductInfo>
+      </NavLink>
+      <ProductDescription>
+        <p>{description}</p>
+      </ProductDescription>
       <p>
         <strong>Quantity: </strong>
         {quantity}
       </p>
-    </div>
+    </StyledProductComponent>
   )
 }

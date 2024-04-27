@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { backendUriPrefix } from '../../config'
+import { ProductResponseInterface } from '../../types/Responses'
 import {
   CreateProductButton,
   ProductDescription,
@@ -32,7 +33,7 @@ export const InsertProduct = () => {
           authorization: `Bearer ${token}`,
         },
       })
-      const responseData = await response.json()
+      const responseData: ProductResponseInterface = await response.json()
       console.log('Response:')
       console.log(responseData)
     } catch (err) {

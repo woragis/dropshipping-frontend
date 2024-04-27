@@ -1,9 +1,12 @@
 import { FC, useEffect, useState } from 'react'
 import { CartProduct } from '../../components/Product'
 import { StyledCartPage } from './style'
+import { CartResponseInterface } from '../../types/Responses'
 
 export const Cart: FC = () => {
-  const [cartData, setCartData] = useState<any>(undefined)
+  const [cartData, setCartData] = useState<CartResponseInterface[] | undefined>(
+    undefined
+  )
   const [cartComponent, setCartComponent] = useState<any>(undefined)
   const fetchCart = async () => {
     try {
@@ -18,7 +21,7 @@ export const Cart: FC = () => {
         },
       })
       if (response.ok) {
-        const responseData = await response.json()
+        const responseData: CartResponseInterface[] = await response.json()
         setCartData(responseData)
       } else {
         console.log('Error fetching cart')
@@ -32,16 +35,19 @@ export const Cart: FC = () => {
   }, [])
   useEffect(() => {
     if (cartData) {
-      const cartItems = cartData.map((data: any) => {
-        return (
-          <CartProduct
-            _id={data.product._id}
-            title={data.product.title}
-            price={data.product.price}
-            quantity={data.quantity}
-          />
-        )
-      })
+      const cartItems = cartData.map(
+        ({ product, quantity }: CartResponseInterface) => {
+          return (
+            <CartProduct
+              _id={product._id}
+              title={product.title}
+              price={product.price}
+              description={product.description}
+              quantity={quantity}
+            />
+          )
+        }
+      )
       setCartComponent(cartItems)
     }
   }, [cartData])
