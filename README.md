@@ -9,7 +9,10 @@
 - Styling _Carlos_
 
 - Recomendations row
+
   1. For cart items
   2. For wishlist items
   3. For history items
   4. For general items
+
+- Write more comments for code mantainability
