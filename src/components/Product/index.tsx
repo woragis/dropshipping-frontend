@@ -3,13 +3,20 @@ import { NavLink } from 'react-router-dom'
 import { backendUriPrefix } from '../../config'
 import { ProductComponentProps } from '../../types/Products'
 import { CartProductProps } from '../../types/Products'
+import { ProductCartCount } from './style'
 import {
+  ProductCartInteraction,
   ProductDescription,
   ProductInfo,
+  ProductInteraction,
   ProductPicture,
   ProductPrice,
   ProductTitle,
+  StyledCartButton,
+  StyledDecrementButton,
+  StyledIncrementButton,
   StyledProductComponent,
+  StyledWishlistButton,
 } from './style'
 
 export const StoreProduct = ({
@@ -77,13 +84,15 @@ export const StoreProduct = ({
           </ProductDescription>
         </ProductInfo>
       </NavLink>
-      <button onClick={addToWishlist}>Add to Wishlist</button>
-      <div>
-        <button onClick={decrementCartQuantity}>Decrement</button>
-        <span>{cartQuantity}</span>
-        <button onClick={incrementCartQuantity}>Increment</button>
-      </div>
-      <button onClick={addToCart}>Add to Cart</button>
+      <ProductInteraction>
+        <StyledWishlistButton onClick={addToWishlist} />
+        <ProductCartInteraction>
+          <StyledDecrementButton onClick={decrementCartQuantity} />
+          <ProductCartCount>{cartQuantity}</ProductCartCount>
+          <StyledIncrementButton onClick={incrementCartQuantity} />
+        </ProductCartInteraction>
+        <StyledCartButton onClick={addToCart} />
+      </ProductInteraction>
     </StyledProductComponent>
   )
 }
