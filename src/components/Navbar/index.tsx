@@ -1,9 +1,11 @@
+import { useSelector } from 'react-redux'
 import {
   navPages,
   unloggedUserPages,
   loggedUserPages,
   adminUserPages,
 } from '../../pages/pagesData'
+import { RootState } from '../../redux'
 import { Pages } from '../../types/Pages'
 import { Logout } from '../Logout'
 import { StyledHeader, StyledLinks, StyledLink, StyledLogo } from './style'
@@ -39,8 +41,7 @@ export const Navbar: React.FC = () => {
     )
   })
 
-  const isAdmin = localStorage.getItem('role') === 'admin' ? true : false
-  const isLogged = localStorage.getItem('token')
+  const { token, admin } = useSelector((state: RootState) => state.auth)
 
   return (
     <StyledHeader>
@@ -49,10 +50,10 @@ export const Navbar: React.FC = () => {
       </StyledLogo>
       <StyledLinks>
         {links}
-        {isAdmin && adminPages}
-        {isLogged && loggedPages}
-        {!isLogged && unloggedPages}
-        {isLogged && <Logout />}
+        {admin && adminPages}
+        {token && loggedPages}
+        {!token && unloggedPages}
+        {token && <Logout />}
       </StyledLinks>
     </StyledHeader>
   )

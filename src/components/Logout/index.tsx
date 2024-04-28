@@ -1,9 +1,12 @@
+import { useDispatch } from 'react-redux'
 import { StyledLogoutComponent } from './style'
+import { logout } from '../../redux/authActions'
 
 export const Logout = () => {
-  const logout = async () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('role')
-  }
-  return <StyledLogoutComponent onClick={logout}>Logout</StyledLogoutComponent>
+  const dispatch = useDispatch()
+  return (
+    <StyledLogoutComponent onClick={() => dispatch(logout())}>
+      Logout
+    </StyledLogoutComponent>
+  )
 }

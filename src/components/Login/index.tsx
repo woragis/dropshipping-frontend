@@ -3,14 +3,18 @@ import { backendUriPrefix } from '../../config'
 import { LoginButton, StyledLoginComponent } from './style'
 import { LoginDataInterface } from '../../types/Forms'
 import { LoginResponseInterface } from '../../types/Responses'
+import { useDispatch } from 'react-redux'
+import { login } from '../../redux/authActions'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
   const [loginData, setLoginData] = useState<LoginDataInterface>(
     {} as LoginDataInterface
   )
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const submitLogin = async (event: FormEvent<HTMLFormElement>) => {
-    console.log('Trying to login')
     event.preventDefault()
     try {
       const backendUrl = backendUriPrefix + 'auth/login'
@@ -22,9 +26,9 @@ export const Login = () => {
       })
       const responseData: LoginResponseInterface = await response.json()
       if (response.ok) {
-        const { token, role } = responseData
-        localStorage.setItem('token', token)
-        localStorage.setItem('role', role)
+        const { token, username, role } = responseData
+        dispatch(login(token, username, role === 'admin' ? true : false))
+        navigate('/')
       } else {
         console.log('Error when receiving request')
         console.error(responseData)
@@ -36,7 +40,6 @@ export const Login = () => {
 
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [event.target.id]: event.target.value })
-    console.log(loginData)
   }
 
   return (

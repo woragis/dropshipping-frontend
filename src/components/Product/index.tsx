@@ -1,6 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { backendUriPrefix } from '../../config'
+import { RootState } from '../../redux'
 import { ProductComponentProps } from '../../types/Products'
 import { CartProductProps } from '../../types/Products'
 import {
@@ -31,10 +33,14 @@ export const StoreProduct = ({
   description,
 }: ProductComponentProps) => {
   const [cartQuantity, setCartQuantity] = useState<number>(1)
+  const { token } = useSelector((state: RootState) => state.auth)
+  const navigate = useNavigate()
   const addToWishlist = async () => {
+    if (!token) {
+      return navigate('/login')
+    }
     try {
       const backendUri = backendUriPrefix + 'wishlist'
-      const token = localStorage.getItem('token')
       const response = await fetch(backendUri, {
         method: 'POST',
         body: JSON.stringify({ _id: _id }),
@@ -52,9 +58,11 @@ export const StoreProduct = ({
     }
   }
   const addToCart = async () => {
+    if (!token) {
+      return navigate('/login')
+    }
     try {
       const backendUri = backendUriPrefix + 'cart'
-      const token = localStorage.getItem('token')
       const response = await fetch(backendUri, {
         method: 'POST',
         body: JSON.stringify({ _id: _id, quantity: cartQuantity }),
