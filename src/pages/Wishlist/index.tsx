@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { StoreProduct } from '../../components/Product'
 import { backendUriPrefix } from '../../config'
+import { RootState } from '../../redux'
 import { WishlistResponseInterface } from '../../types/Responses'
 
 export const Wishlist = () => {
@@ -8,9 +10,9 @@ export const Wishlist = () => {
     WishlistResponseInterface[] | undefined
   >(undefined)
   const [componentBitch, setComponentBitch] = useState<any>(undefined)
+  const { token } = useSelector((state: RootState) => state.auth)
   const fetchWishlist = async () => {
     try {
-      const token = localStorage.getItem('token')
       const backendUri = backendUriPrefix + 'wishlist'
       const response = await fetch(backendUri, {
         method: 'GET',

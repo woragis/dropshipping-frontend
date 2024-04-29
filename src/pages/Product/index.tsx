@@ -5,13 +5,6 @@ import { ProductResponseInterface } from '../../types/Responses'
 
 export const Product = () => {
   const { id } = useParams()
-  console.log('id: ', id)
-  // interface ProductData {
-  // _id: string
-  // title: string
-  // price: number
-  // description: string
-  // }
   const [productData, setProductData] = useState<
     ProductResponseInterface | undefined
   >(undefined)

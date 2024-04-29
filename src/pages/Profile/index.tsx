@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Cart as CartComponent } from '../../components/Cart'
+import { backendUriPrefix } from '../../config'
+import { RootState } from '../../redux'
 import { UserData } from '../../types/Responses'
 
 export const Profile = () => {
   const [profileData, setProfileData] = useState<UserData>({} as UserData)
+  const { token } = useSelector((state: RootState) => state.auth)
   const fetchProfile = async () => {
-    const token = localStorage.getItem('token')
-    const backendUri = 'http://localhost:5000/profile'
+    const backendUri = backendUriPrefix + 'profile'
     const response = await fetch(backendUri, {
       method: 'GET',
       credentials: 'include',

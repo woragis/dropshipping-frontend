@@ -1,5 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { backendUriPrefix } from '../../config'
+import { RootState } from '../../redux'
 import { ProductResponseInterface } from '../../types/Responses'
 import {
   CreateProductButton,
@@ -17,12 +20,14 @@ export const InsertProduct = () => {
   const [newProductData, setNewProductData] = useState<
     InsertProductDataInterface
   >({} as InsertProductDataInterface)
-
+  const navigate = useNavigate()
+  const { token, admin } = useSelector((state: RootState) => state.auth)
   const insertProduct = async (event: FormEvent<HTMLFormElement>) => {
-    console.log('Trying to insert product')
     event.preventDefault()
+    if (!admin) {
+      return navigate('/')
+    }
     try {
-      const token = localStorage.getItem('token')
       const backendUrl = backendUriPrefix + 'products/new'
       const response = await fetch(backendUrl, {
         method: 'POST',
@@ -36,6 +41,7 @@ export const InsertProduct = () => {
       const responseData: ProductResponseInterface = await response.json()
       console.log('Response:')
       console.log(responseData)
+      navigate('/products/product/' + responseData._id)
     } catch (err) {
       console.error('Error at function', err)
     }

@@ -2,16 +2,19 @@ import { FC, useEffect, useState } from 'react'
 import { CartProduct } from '../../components/Product'
 import { StyledCartPage } from './style'
 import { CartResponseInterface } from '../../types/Responses'
+import { backendUriPrefix } from '../../config'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux'
 
 export const Cart: FC = () => {
   const [cartData, setCartData] = useState<CartResponseInterface[] | undefined>(
     undefined
   )
   const [cartComponent, setCartComponent] = useState<any>(undefined)
+  const { token } = useSelector((state: RootState) => state.auth)
   const fetchCart = async () => {
     try {
-      const backendUri = 'http://localhost:5000/' + 'cart'
-      const token = localStorage.getItem('token')
+      const backendUri = backendUriPrefix + 'cart'
       const response = await fetch(backendUri, {
         method: 'GET',
         credentials: 'include',

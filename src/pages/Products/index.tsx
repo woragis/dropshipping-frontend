@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AdminProduct, StoreProduct } from '../../components/Product'
+import { backendUriPrefix } from '../../config'
 import { ProductComponentProps } from '../../types/Products'
 import { ProductResponseInterface } from '../../types/Responses'
 import { StyledProducts } from './style'
@@ -12,7 +13,7 @@ export const Products = () => {
 
   const ProductsData = async (skip: number = 0, limit: number = 10) => {
     try {
-      const backendUri = 'http://localhost:5000/products'
+      const backendUri = backendUriPrefix + 'products'
       const response = await fetch(backendUri, {
         method: 'POST',
         body: JSON.stringify({ skip, limit }),

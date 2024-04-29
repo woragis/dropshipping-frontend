@@ -2,14 +2,19 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { backendUriPrefix } from '../../config'
 import { RegisterButton, StyledRegisterComponent } from './style'
 import { RegisterDataInterface } from '../../types/Forms'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { login } from '../../redux/authActions'
+import { LoginResponseInterface } from '../../types/Responses'
 
 export const Register = () => {
   const [registerData, setRegisterData] = useState<RegisterDataInterface>(
     {} as RegisterDataInterface
   )
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const register = async (event: FormEvent<HTMLFormElement>) => {
-    console.log('Trying to register')
     event.preventDefault()
     try {
       const backendUri = backendUriPrefix + 'auth/register'
@@ -19,12 +24,11 @@ export const Register = () => {
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
       })
-      const responseData = await response.json()
+      const responseData: LoginResponseInterface = await response.json()
       if (response.ok) {
-        const { token } = responseData
-        localStorage.setItem('token', token)
-        localStorage.setItem('admin', responseData.admin)
-        console.log(responseData)
+        const { token, username, role } = responseData
+        dispatch(login(token, username, role === 'admin' ? true : false))
+        navigate('/')
       } else {
         console.log('Error when receiving request')
         console.error(responseData)
