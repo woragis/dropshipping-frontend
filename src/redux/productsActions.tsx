@@ -22,6 +22,7 @@ interface SaveWishlistAction {
   type: typeof SAVE_WISHLIST
   payload: ProductComponentProps[]
 }
+
 // actions creators
 export const saveProducts = (
   storeProducts: ProductComponentProps[]

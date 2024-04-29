@@ -4,9 +4,9 @@
 
   1. ~Token~ (improve cookie (http only))
   2. ~User info _admin - username - email_~ (improve cookie (http only))
-  3. Store products to improve search (local storage)
-  4. Cart items and quantity (local storage)
-  5. Wishlist products and show it on heart icon (local storage)
+  3. **Store products to improve search (local storage)**
+  4. **Cart items and quantity (local storage)**
+  5. **Wishlist products and show it on heart icon (local storage)**
 
 - Styling _Carlos_
 

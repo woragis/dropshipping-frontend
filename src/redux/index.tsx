@@ -1,12 +1,14 @@
 import { combineReducers, createStore } from 'redux'
 // import { devToolsEnhancer } from 'redux-devtools-extension'
 import authReducer from './authReducer'
+import productReducer from './product/reducer'
 import productsReducer from './productsReducer'
 
 /* Create root reducer, containing all features of the application */
 const rootReducer = combineReducers({
   auth: authReducer,
   products: productsReducer,
+  product: productReducer,
 })
 
 const store = createStore(rootReducer)
