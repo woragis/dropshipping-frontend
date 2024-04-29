@@ -37,7 +37,7 @@ const productsReducer = (
       saveStoreProducts(action.payload)
       return [...state, ...action.payload]
     case SAVE_CART:
-      return state
+      return [...state, ...action.payload]
     case SAVE_WISHLIST:
       return state
     default:
@@ -46,3 +46,25 @@ const productsReducer = (
 }
 
 export default productsReducer
+
+/*
+Salvar Produtos da loja:
+produto: {_id, title, price, description}
+
+Salvar Produtos do carrinho:
+produto: {_id, quantity}
+  adicionar produto ao carrinho:
+    carrinho.push(products.find(_id))
+    carrinho[item].quantity += 1
+  remover do carrinho
+    carrinho[item].quantity -=1
+    if (0) {
+      carrinho[item].remove()
+    }
+Salvar Produtos da wishlist:
+produto: {_id}
+  adicionar produto ao wishlist:
+    wishlist.push(produtos.find(_id))
+  remover produto da wishlist:
+    wishlist.remove(produtos._id)
+*/
