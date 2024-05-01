@@ -4,7 +4,7 @@ import { LoginButton, StyledLoginComponent } from './style'
 import { LoginDataInterface } from '../../types/Forms'
 import { LoginResponseInterface } from '../../types/Responses'
 import { useDispatch } from 'react-redux'
-import { login } from '../../redux/authActions'
+import { login } from '../../redux/auth/actions'
 import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {

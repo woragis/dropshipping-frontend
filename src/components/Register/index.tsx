@@ -4,7 +4,7 @@ import { RegisterButton, StyledRegisterComponent } from './style'
 import { RegisterDataInterface } from '../../types/Forms'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { login } from '../../redux/authActions'
+import { login } from '../../redux/auth/actions'
 import { LoginResponseInterface } from '../../types/Responses'
 
 export const Register = () => {

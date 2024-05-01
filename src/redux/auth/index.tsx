@@ -1,19 +1,20 @@
-import { LOGIN, LOGOUT } from './authActions'
+import { LOGIN, LOGOUT } from './actions'
 
 export const getLoginCookie = (): {
   token: string
   username: string
   admin: boolean
-} | null => {
+} => {
   const cookieValue = document.cookie
     .split('; ')
     .find((cookie) => cookie.startsWith('loginInfo='))
   if (cookieValue) {
     const encodedLoginInfo = cookieValue.split('=')[1]
     const decodedLoginInfo = decodeURIComponent(encodedLoginInfo)
-    return JSON.parse(decodedLoginInfo)
+    const loginInfo: UserState = JSON.parse(decodedLoginInfo)
+    return loginInfo
   } else {
-    return null
+    return { token: '', username: '', admin: false }
   }
 }
 
@@ -40,11 +41,7 @@ interface UserState {
   admin: boolean
 }
 
-const initialState: UserState = {
-  token: '',
-  username: '',
-  admin: false,
-}
+const initialState: UserState = getLoginCookie()
 
 interface AuthPayload {
   type: typeof LOGIN | typeof LOGOUT

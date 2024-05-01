@@ -1,6 +1,6 @@
 import { backendUriPrefix } from '../../config'
 import { ProductComponentProps } from '../../types/Products'
-import { getLoginCookie } from '../authReducer'
+import { getLoginCookie } from '../auth'
 import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, GET_WISHLIST } from './actions'
 
 const saveWishlist = (wishlist: Array<{}>) => {

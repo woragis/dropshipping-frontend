@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { StyledLogoutComponent } from './style'
-import { logout } from '../../redux/authActions'
+import { logout } from '../../redux/auth/actions'
 
 export const Logout = () => {
   const dispatch = useDispatch()
