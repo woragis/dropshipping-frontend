@@ -41,8 +41,9 @@ const getWishlist = (): ProductComponentProps[] => {
   const wishlist = localStorage.getItem('wishlist')
   if (wishlist) {
     return JSON.parse(wishlist)
+  } else {
+    return []
   }
-  return []
 }
 
 const addWishlistProduct = (product: ProductComponentProps) => {
@@ -63,7 +64,7 @@ const removeWishlistProduct = (product: ProductComponentProps) => {
   }
 }
 
-const initialState: ProductComponentProps[] = []
+const initialState: ProductComponentProps[] = getWishlist()
 
 interface WishlistPayload {
   type:
@@ -87,12 +88,13 @@ const wishlistReducer = (
     case GET_WISHLIST:
       console.log('Getting local storage wishlist')
       const storedWishlist = getWishlist()
-      if (storedWishlist.length === 0) {
+      if (storedWishlist.length > 0) {
+        console.log('Wishlist found in localstorage: ', storedWishlist)
+        return [...state, ...storedWishlist]
+      } else {
         console.log('Fetching server wishlist')
         const serverWishlist = fetchWishlist()
         return [...state, ...serverWishlist]
-      } else {
-        return [...state, ...storedWishlist]
       }
 
     default:
