@@ -1,4 +1,3 @@
-import { CartProductProps, ProductComponentProps } from '../../types/Products'
 import {
   ADD_WISHLIST_PRODUCT,
   REMOVE_WISHLIST_PRODUCT,
@@ -19,11 +18,11 @@ const initialState = {} as ProductState
 
 interface ProductPayload {
   type:
-    | typeof ADD_WISHLIST_PRODUCT
-    | typeof REMOVE_WISHLIST_PRODUCT
-    | typeof ADD_CART_PRODUCT
-    | typeof REMOVE_CART_PRODUCT
-  payload: ProductComponentProps | CartProductProps
+  | typeof ADD_WISHLIST_PRODUCT
+  | typeof REMOVE_WISHLIST_PRODUCT
+  | typeof ADD_CART_PRODUCT
+  | typeof REMOVE_CART_PRODUCT
+  payload: ProductState
 }
 
 const productReducer = (
